@@ -30,6 +30,12 @@ if !exists("g:vim_markdown_preview_hotkey")
 endif
 
 
+if !exists("g:vim_markdown_preview_executable")
+    let g:vim_markdown_preview_executable='markdown'
+endif
+
+
+
 let g:vmp_osname = 'Unidentified'
 
 if has('win32')
@@ -53,7 +59,7 @@ function! Vim_Markdown_Preview()
   if g:vim_markdown_preview_github == 1
     call system('grip "' . b:curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   else
-    call system('markdown "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+        call system(g:vim_markdown_preview_executable . ' "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   endif
 
   if g:vmp_osname == 'unix'
